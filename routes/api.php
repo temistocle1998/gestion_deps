@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DepenseController;
-use App\Http\Controllers\RevenuController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +33,9 @@ Route::group([
     Route::post('/depense', [DepenseController::class, 'store']);
     Route::get('/depense', [DepenseController::class, 'getDepenseByUser']);
     Route::resource('/revenu', RevenuController::class);
+    Route::get('/currentRevenu', 'RevenuController@revenuActuel');
 
 
 });
 
 Route::resource('/categorie', CategorieController::class);
-Route::get('/revenu/currentRevenu', [RevenuController::class, 'revenuActuel']);

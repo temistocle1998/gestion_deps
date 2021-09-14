@@ -115,4 +115,25 @@ class DepenseController extends Controller
 
         return response()->json($data, 200);;
     }
+
+    public function getDepenseByMonth($month)
+    {
+        $data = Depense::whereRaw('MONTH(created_at) = '.$month)->get();
+
+        return response()->json($data, 200);
+    }
+
+    public function getDepenseByDay($day)
+    {
+        $data = Depense::whereRaw('DAY(created_at) = '.$day)->get();
+
+        return response()->json($data, 200);
+    }
+
+    public function getDepenseByYear($year)
+    {
+        $data = Depense::whereRaw('YEAR(created_at) = '.$year)->get();
+
+        return response()->json($data, 200);
+    }
 }

@@ -123,8 +123,8 @@ class RevenuController extends Controller
     {
         $revenu = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
         $depense = Depense::with('users')->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
-        return response()->json($depense, 200);
+
+        $data = $revenu - $depense;
+        return response()->json(['montant' => $data], 200);
     }
-
-
 }
