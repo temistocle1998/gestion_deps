@@ -18,7 +18,7 @@ class Depense extends Model
         'depense_id');
     }
 
-    public function categorie(): BelongsTo
+    public function categorie()
     {
         return $this->belongsTo(Categorie::class);
     }

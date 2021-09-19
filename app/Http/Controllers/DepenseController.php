@@ -111,7 +111,10 @@ class DepenseController extends Controller
 
     public function getDepenseByUser()
     {
-        $data = User::with('depenses')->where('id', '=' ,  $this->auth->user()->id)->get();
+        //$data = User::with('depenses')->where('id', '=' ,  $this->auth->user()->id)->get();
+        $data = Depense::with('categorie')->join('depense_users', 'depense_users.user_id', '=', 'id')
+        ->where('user_id', '=', $this->auth->user()->id)
+        ->select('depenses.description', 'depenses.montant', 'depenses.date', 'depenses.categorie_id')->get();
 
         return response()->json($data, 200);;
     }
