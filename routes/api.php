@@ -32,6 +32,7 @@ Route::group([
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
     Route::post('/depense', [DepenseController::class, 'store']);
     Route::get('/depense', [DepenseController::class, 'getDepenseByUser']);
+    Route::get('/depense-actuel', [DepenseController::class, 'getTotalCurrentDepense']);
     Route::resource('/revenu', RevenuController::class);
     Route::get('/currentRevenu', 'RevenuController@revenuActuel');
 

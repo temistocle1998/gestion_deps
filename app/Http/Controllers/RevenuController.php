@@ -125,6 +125,7 @@ class RevenuController extends Controller
         $depense = Depense::with('users')->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
 
         $data = $revenu - $depense;
+
         return response()->json(['montant' => $data], 200);
     }
 }
