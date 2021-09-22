@@ -35,8 +35,11 @@ Route::group([
     Route::get('/depense-actuel', [DepenseController::class, 'getTotalCurrentDepense']);
     Route::resource('/revenu', RevenuController::class);
     Route::get('/currentRevenu', 'RevenuController@revenuActuel');
-
+    Route::get('/AllRevenuByUser', 'RevenuController@AllRevenuByUser');
+    Route::get('/revenuMois', 'RevenuController@revenuMois');
 
 });
 
 Route::resource('/categorie', CategorieController::class);
+Route::get('/getNombreCategorie', 'CategorieController@getNombreCategorie');
+Route::get('/getTypeRevenu', 'RevenuController@getTypeRevenu');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Revenu;
+use App\TypeRevenu;
 use App\Depense;
 use Illuminate\Auth\AuthManager;
 use Carbon\Carbon;
@@ -128,4 +129,26 @@ class RevenuController extends Controller
 
         return response()->json(['montant' => $data], 200);
     }
+
+    public function AllRevenuByUser()
+    {
+        $data = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->get();
+        
+
+        return response()->json($data, 200);
+    }
+
+     public function revenuMois()
+    {
+        $revenu = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
+        return response()->json($revenu, 200);
+    }
+
+    public function getTypeRevenu()
+    {
+        $data = TypeRevenu::all();
+
+        return response()->json($data, 200);
+    }
+   
 }

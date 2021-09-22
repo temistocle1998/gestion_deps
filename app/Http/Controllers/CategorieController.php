@@ -93,4 +93,10 @@ class CategorieController extends Controller
     {
         //
     }
+
+    public function getNombreCategorie() {
+        $data = Categorie::all()->count();
+
+         return response()->json($data, 200);
+    }
 }
