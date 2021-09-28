@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'middleware' => 'guest',
+    'middleware' => 'api',
     'prefix' => 'auth'
 
 ], function ($router) {
