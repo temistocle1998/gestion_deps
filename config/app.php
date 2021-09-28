@@ -175,6 +175,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
     ],
 
@@ -231,5 +232,6 @@ return [
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
 
     ],
+
 
 ];
