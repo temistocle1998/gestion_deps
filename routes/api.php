@@ -21,10 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'middleware' => 'api',
+    'middleware' => 'cors',
     'prefix' => 'auth'
 
-], function () {
+], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -42,4 +42,4 @@ Route::group([
 
 Route::resource('/categorie', CategorieController::class);
 Route::get('/getNombreCategorie', 'CategorieController@getNombreCategorie');
-Route::get('/getTypeRevenu', 'RevenuController@getTypeRevenu');
+Route::get('/getTypeRevenu', 'RevenuController@getTypeRevenu')->middleware("cors");;
