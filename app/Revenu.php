@@ -8,7 +8,7 @@ class Revenu extends Model
 {
     protected $guarded = [];
 
-    public function type_revenu(): BelongsTo
+    public function type_revenu()
     {
         return $this->belongsTo(TypeRevenu::class);
     }

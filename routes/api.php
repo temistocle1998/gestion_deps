@@ -42,3 +42,4 @@ Route::group([
 Route::resource('/categorie', CategorieController::class);
 Route::get('/getNombreCategorie', 'CategorieController@getNombreCategorie');
 Route::get('/getTypeRevenu', 'RevenuController@getTypeRevenu');
+Route::get('/getDepenseByYear/{year}', 'DepenseController@getDepenseByYear');

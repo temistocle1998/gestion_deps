@@ -132,7 +132,7 @@ class RevenuController extends Controller
 
     public function AllRevenuByUser()
     {
-        $data = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->get();
+        $data = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->with('type_revenu')->get();
         
 
         return response()->json($data, 200);
