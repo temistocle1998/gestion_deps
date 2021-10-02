@@ -19,7 +19,6 @@ class RevenuController extends Controller
 
     public function __construct(AuthManager $auth)
     {
-        $this->middleware('auth:api');
         $this->auth = $auth;
     }
 
@@ -133,7 +132,7 @@ class RevenuController extends Controller
     public function AllRevenuByUser()
     {
         $data = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->with('type_revenu')->get();
-        
+
 
         return response()->json($data, 200);
     }
@@ -150,5 +149,5 @@ class RevenuController extends Controller
 
         return response()->json($data, 200);
     }
-   
+
 }

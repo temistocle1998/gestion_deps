@@ -18,7 +18,6 @@ class DepenseController extends Controller
 
     public function __construct(AuthManager $auth)
     {
-        $this->middleware('auth:api');
         $this->auth = $auth;
     }
     /**
@@ -121,9 +120,9 @@ class DepenseController extends Controller
         // $data = DB::select('SELECT depenses.montant FROM depenses JOIN depense_users WHERE depense_users.user_id = :user_id',['user_id' => $this->auth->user()->id]);
         // $data = DB::table('depenses')->join('depense_users', 'depense_users.user_id', '=', 'user_id')->where('user_id', '=', '1')->get();
         $data= DB::SELECT("SELECT dep.depense_id, d.description, d.montant, c.nom
-FROM depenses d 
+FROM depenses d
 INNER JOIN depense_users dep
-ON  d.id = dep.depense_id 
+ON  d.id = dep.depense_id
 INNER JOIN categories c ON c.id = d.categorie_id
 INNER JOIN users u ON dep.user_id=u.id WHERE u.id=?", [$this->auth->user()->id]);
 
