@@ -113,12 +113,19 @@ class DepenseController extends Controller
 
     public function getDepenseByUser()
     {
-        $data = User::with('depenses')->join('categorie')->where('id', '=' ,  $this->auth->user()->id)->get();
+        //$data = User::with('depenses')->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=' ,  $this->auth->user()->id)->get();
+        //$data = Depense::with('categorie')->join('depense_users', 'depense_users.user_id', '=', 'user_id')->where('user_id', '=' ,  $this->auth->user()->id)->get();
         // $data = Depense::with('categorie')->join('depense_users', 'depense_users.user_id', '=', 'depense_users.user_id')
         // ->where('depense_users.user_id', '=', $this->auth->user()->id)
         // ->select('depenses.id', 'depenses.description', 'depenses.montant', 'depenses.date', 'depenses.categorie_id')->get();
         // $data = DB::select('SELECT depenses.montant FROM depenses JOIN depense_users WHERE depense_users.user_id = :user_id',['user_id' => $this->auth->user()->id]);
         // $data = DB::table('depenses')->join('depense_users', 'depense_users.user_id', '=', 'user_id')->where('user_id', '=', '1')->get();
+        $data= DB::SELECT("SELECT dep.depense_id, d.description, d.montant, c.nom
+FROM depenses d 
+INNER JOIN depense_users dep
+ON  d.id = dep.depense_id 
+INNER JOIN categories c ON c.id = d.categorie_id
+INNER JOIN users u ON dep.user_id=u.id WHERE u.id=?", [$this->auth->user()->id]);
 
         return response()->json($data, 200);
     }

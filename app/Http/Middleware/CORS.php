@@ -17,7 +17,7 @@ class CORS
     {
        
         return $next($request)
-                    ->header('Access-Control-Allow-Origin', '*')
-                    ->header('Access-Control-Allow-Headers', 'Content-type, X-Auth-Token, Origin');
+                    ->header('Access-Control-Allow-Origin', "*")
+                    ->header('Access-Control-Allow-Headers', "Accept,Content-type, Origin, Authorization");
     }
 }
