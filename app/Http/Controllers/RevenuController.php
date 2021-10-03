@@ -19,6 +19,7 @@ class RevenuController extends Controller
 
     public function __construct(AuthManager $auth)
     {
+        $this->middleware('auth:api');
         $this->auth = $auth;
     }
 
