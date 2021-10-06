@@ -16,6 +16,7 @@ class CreateTypeRevenusTable extends Migration
         Schema::create('type_revenus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('intitule');
+            $table->timestamps();
         });
     }
 
