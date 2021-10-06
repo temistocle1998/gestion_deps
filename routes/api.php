@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 header('Access-Control-Allow-Origin: https://gestion-depense-angular.herokuapp.com');
 header('Access-Control-Allow-Headers: Accept, Origin, Authorization, X-Requested-Withn, NT,X-CustomHeader,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range');
+header('Access-Control-Allow-Methods', 'HEAD, GET, POST, PUT, DELETE')
 /*
 |--------------------------------------------------------------------------
 | API Routes
