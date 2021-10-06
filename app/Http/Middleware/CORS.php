@@ -17,7 +17,7 @@ class CORS
     {
         header('Access-Control-Allow-Origin', '*');
         header('Access-Control-Allow-Methods', "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-        header('Access-Control-Allow-Headers: Accept,Content-type, Origin, Authorization, X-Requested-With');
+        header('Access-Control-Allow-Headers: Accept, Origin, Authorization, X-Requested-Withn, NT,X-CustomHeader,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range');
         return $next($request);
     }
 }
