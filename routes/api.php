@@ -5,7 +5,7 @@ use App\Http\Controllers\DepenseController;
 use App\Http\Middleware\CORS;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-header('Access-Control-Allow-Origin', "*");
+header('Access-Control-Allow-Origin: :  https://gestion-depense-angular.herokuapp.com');
 /*
 |--------------------------------------------------------------------------
 | API Routes
