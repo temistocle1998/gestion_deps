@@ -5,6 +5,7 @@ use App\Revenu;
 use App\TypeRevenu;
 use App\Depense;
 use Illuminate\Auth\AuthManager;
+use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
 
@@ -123,11 +124,24 @@ class RevenuController extends Controller
     public function revenuActuel()
     {
         $revenu = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
-        $depense = Depense::with('users')->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
+        // $depense = Depense::with('users')->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
+        $depenses= DB::SELECT("SELECT SUM(d.montant) as total
+        FROM depenses d
+        INNER JOIN depense_users dep
+        ON d.id = dep.depense_id
+        INNER JOIN users u ON dep.user_id=u.id
+        WHERE u.id=? AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
 
-        $data = $revenu - $depense;
+        foreach ($depenses as $depense) {
+            # code...
+        }
 
-        return response()->json(['montant' => $data], 200);
+        foreach ($depenses as $key => $value) {
+            # code...
+        }
+        $data = $revenu - $value;
+
+        return response()->json($value, 200);
     }
 
     public function AllRevenuByUser()

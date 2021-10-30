@@ -113,7 +113,6 @@ class DepenseController extends Controller
 
     public function getDepenseByUser()
     {
-
         $data= DB::SELECT("SELECT dep.depense_id, d.description, d.montant, c.nom, d.created_at
                 FROM depenses d
                 INNER JOIN depense_users dep
@@ -151,7 +150,7 @@ class DepenseController extends Controller
         // ->join('depense_users', 'depense_users.user_id', '=', 'id')
         // ->where('id', '=', $this->auth->user()->id)
         // ->sum('montant');
-        $data= DB::SELECT("SELECT SUM(d.montant)
+        $data= DB::SELECT("SELECT SUM(d.montant) as montant
         FROM depenses d
         INNER JOIN depense_users dep
         ON d.id = dep.depense_id
