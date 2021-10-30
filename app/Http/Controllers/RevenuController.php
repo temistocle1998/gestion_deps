@@ -140,7 +140,10 @@ class RevenuController extends Controller
 
      public function revenuMois()
     {
-        $revenu = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
+        $revenu = Revenu::with('user')
+        ->where('user_id', '=', $this->auth->user()->id)
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->sum('montant');
         return response()->json($revenu, 200);
     }
 
