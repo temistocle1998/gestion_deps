@@ -163,6 +163,6 @@ class DepenseController extends Controller
         // ->sum('depenses.montant');
         // $year = Carbon::now();
         // $data = Depense::whereRaw('MONTH(created_at) = '.$year->month)->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=', $this->auth->user()->id)->sum('montant');
-        return response()->json($depense, 200);
+        return response()->json($data[0], 200);
     }
 }
