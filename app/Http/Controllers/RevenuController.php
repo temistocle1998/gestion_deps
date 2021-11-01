@@ -137,10 +137,6 @@ class RevenuController extends Controller
         }
         $data = (int)($revenu) - (int)($depenseIT);
 
-
-
-
-
         return response()->json($data, 200);
     }
 
