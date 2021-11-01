@@ -154,7 +154,8 @@ class DepenseController extends Controller
         FROM depenses d
         INNER JOIN depense_users dep
         ON d.id = dep.depense_id
-        INNER JOIN users u ON dep.user_id=u.id WHERE u.id=? AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
+        INNER JOIN users u ON dep.user_id=u.id WHERE u.id=?
+        AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
         // $data = DB::table('depenses')
         // ->whereMonth('created_at', Carbon::now()->month)
         // ->join('depense_users', 'depense_users.user_id', '=', 'id')
@@ -162,6 +163,6 @@ class DepenseController extends Controller
         // ->sum('depenses.montant');
         // $year = Carbon::now();
         // $data = Depense::whereRaw('MONTH(created_at) = '.$year->month)->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=', $this->auth->user()->id)->sum('montant');
-        return response()->json($data, 200);
+        return response()->json($depense, 200);
     }
 }
