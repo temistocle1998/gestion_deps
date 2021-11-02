@@ -145,18 +145,25 @@ class DepenseController extends Controller
     }
 
     public function getTotalCurrentDepense(){
-        $data= DB::SELECT("SELECT SUM(d.montant) as montant
-        FROM depenses d
-        INNER JOIN depense_users dep
-        ON d.id = dep.depense_id
-        INNER JOIN users u ON dep.user_id=u.id WHERE u.id=?
-        AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
+        // $data= DB::SELECT("SELECT SUM(d.montant) as montant
+        // FROM depenses as d
+        // INNER JOIN depense_users as dep
+        // ON d.id = dep.depense_id
+        // INNER JOIN users as u ON dep.user_id=u.id WHERE u.id=?
+        // AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
 
-        // $data = User::with('depenses')->join('depense_users', 'depense_users.user_id', '=', 'id')
+        // $data = DB::table('depenses')->join('depenses_users', 'users.id', '=', 'id')->where('id', '=', $this->auth->user()->id)->get();
+
+        $data = Depense::whereHas('users', function ($q)
+        {
+            $q->where('id', $this->auth->user()->id);
+        })
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->sum('montant');
         // ->where('id', '=', $this->auth->user()->id)
         // ->whereMonth('created_at', Carbon::now()->month)
         // ->get();
-        return response()->json($data[0], 200);
+        return response()->json($data, 200);
         // return response()->json($data, 200);
     }
 }
