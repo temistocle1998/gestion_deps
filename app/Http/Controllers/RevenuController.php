@@ -142,7 +142,7 @@ class RevenuController extends Controller
 
         $data = (int)($revenu) - (int)($depense);
 
-        return response()->json($data, 200);
+        return response()->json(['montant'=>$data], 200);
     }
 
     public function AllRevenuByUser()
