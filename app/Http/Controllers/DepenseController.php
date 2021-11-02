@@ -152,8 +152,6 @@ class DepenseController extends Controller
         // INNER JOIN users as u ON dep.user_id=u.id WHERE u.id=?
         // AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
 
-        // $data = DB::table('depenses')->join('depenses_users', 'users.id', '=', 'id')->where('id', '=', $this->auth->user()->id)->get();
-
         $data = Depense::whereHas('users', function ($q)
         {
             $q->where('id', $this->auth->user()->id);

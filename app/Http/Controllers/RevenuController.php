@@ -125,17 +125,22 @@ class RevenuController extends Controller
     {
         $revenu = Revenu::with('user')->where('user_id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
         // $depense = Depense::with('users')->join('depense_users', 'depense_users.user_id', '=', 'id')->where('id', '=', $this->auth->user()->id)->whereMonth('created_at', Carbon::now()->month)->sum('montant');
-        $depense = DB::SELECT("SELECT SUM(d.montant) as total
-        FROM depenses d
-        INNER JOIN depense_users dep
-        ON d.id = dep.depense_id
-        INNER JOIN users u ON dep.user_id=u.id
-        WHERE u.id=? AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
+        // $depense = DB::SELECT("SELECT SUM(d.montant) as total
+        // FROM depenses d
+        // INNER JOIN depense_users dep
+        // ON d.id = dep.depense_id
+        // INNER JOIN users u ON dep.user_id=u.id
+        // WHERE u.id=? AND MONTH(d.date)=?",[$this->auth->user()->id, Carbon::now()->month]);
 
-        foreach ($depense[0] as $depenseIT) {
-            # code...
-        }
-        $data = (int)($revenu) - (int)($depenseIT);
+        $depense = Depense::whereHas('users', function ($q)
+        {
+            $q->where('id', $this->auth->user()->id);
+        })
+        ->whereMonth('created_at', Carbon::now()->month)
+        ->sum('montant');
+
+
+        $data = (int)($revenu) - (int)($depense);
 
         return response()->json($data, 200);
     }
