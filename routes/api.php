@@ -44,7 +44,7 @@ Route::group([
 Route::resource('/categorie', CategorieController::class);
 Route::get('/getNombreCategorie', 'CategorieController@getNombreCategorie');
 Route::get('/getTypeRevenu', 'RevenuController@getTypeRevenu');
-Route::get('/getDepenseByYear/{year}', 'DepenseController@getDepenseByYear');
+//Route::get('/getDepenseByYear/{year}', 'DepenseController@getDepenseByYear');
 // Route::middleware([CORS::class]
 // )->group(function () {
 //     Route::post('/auth/login', [AuthController::class, 'login']);

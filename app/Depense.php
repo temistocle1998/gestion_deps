@@ -14,8 +14,7 @@ class Depense extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(User::class, 'depense_users', 'user_id',
-        'depense_id');
+        return $this->belongsToMany(User::class);
     }
 
     public function categorie()
